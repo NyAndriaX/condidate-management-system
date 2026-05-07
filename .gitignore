@@ -41,4 +41,8 @@ temp/
 playwright-report/
 test-results/
 
+# Compiled JS artifacts from TypeScript test files (never commit these)
+backend/tests/**/*.js
+backend/tests/setup.js
+
 

@@ -18,16 +18,18 @@ test('full candidate workflow', async ({ page }) => {
   // ─── Fill the form ─────────────────────────────────────────────────────
   // CandidateForm uses react-hook-form + Ant Design Form.Item for layout only.
   // The label's `for` does not link to the input's id, so we use placeholders.
-  await page.getByPlaceholder('Jean').fill('John');
-  await page.getByPlaceholder('Dupont').fill('Doe');
-  await page.getByPlaceholder('jean@exemple.com').fill('john.doe@test.com');
-  await page.getByPlaceholder('+33612345678').fill('+261340000000');
-  await page.getByPlaceholder('Ex : Développeur Full Stack').fill('Developpeur Full Stack');
+  // { exact: true } prevents substring matches (e.g. 'Jean' would otherwise also
+  // match the email placeholder 'jean@exemple.com').
+  await page.getByPlaceholder('Jean', { exact: true }).fill('John');
+  await page.getByPlaceholder('Dupont', { exact: true }).fill('Doe');
+  await page.getByPlaceholder('jean@exemple.com', { exact: true }).fill('john.doe@test.com');
+  await page.getByPlaceholder('+33612345678', { exact: true }).fill('+261340000000');
+  await page.getByPlaceholder('Ex : Développeur Full Stack', { exact: true }).fill('Developpeur Full Stack');
   // Ant Design InputNumber renders an <input> with the placeholder
-  await page.getByPlaceholder('3').fill('5');
+  await page.getByPlaceholder('3', { exact: true }).fill('5');
 
   // Skills: type a value then click "Ajouter"
-  await page.getByPlaceholder('Ex : React, TypeScript, Node.js...').fill('JavaScript');
+  await page.getByPlaceholder('Ex : React, TypeScript, Node.js...', { exact: true }).fill('JavaScript');
   await page.getByRole('button', { name: 'Ajouter' }).click();
 
   // Submit

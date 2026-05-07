@@ -1,17 +1,11 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json',
-    },
-  },
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json',
-    },
+  transform: {
+    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
   roots: ['<rootDir>/src', '<rootDir>/tests'],
+  // Playwright e2e tests are run separately via `playwright test`, not Jest
   testPathIgnorePatterns: ['<rootDir>/tests/e2e/'],
   collectCoverageFrom: [
     'src/services/candidate.service.ts',
