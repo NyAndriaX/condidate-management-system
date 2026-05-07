@@ -30,10 +30,14 @@ export const candidateService = {
       params: { page, limit, status },
     });
 
+    const body = response.data;
+    const candidates = Array.isArray(body?.data) ? body.data : [];
+    const pagination = body?.pagination ?? { total: candidates.length, pages: 1 };
+
     return {
-      candidates: response.data.data,
-      total: response.data.pagination.total,
-      pages: response.data.pagination.pages,
+      candidates,
+      total: pagination.total ?? candidates.length,
+      pages: pagination.pages ?? 1,
     };
   },
 
