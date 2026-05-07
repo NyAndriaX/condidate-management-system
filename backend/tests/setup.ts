@@ -19,6 +19,7 @@ if (!process.env.MONGODB_URI) {
 }
 
 let mongoServer: MongoMemoryServer;
+const useExternalMongo = process.env.USE_EXTERNAL_MONGODB === 'true';
 
 export const TEST_USER = {
   email: 'test.user@example.com',
@@ -63,16 +64,22 @@ jest.mock('../src/config/logger', () => ({
 }));
 
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  const mongoUri = mongoServer.getUri();
-
-  process.env.MONGODB_URI = mongoUri;
+  if (!useExternalMongo) {
+    mongoServer = await MongoMemoryServer.create({
+      binary: {
+        // Ubuntu 24.04 GitHub runners do not provide MongoDB 6.0.x binaries.
+        // Pinning to 7.0.x avoids 403 download failures when in-memory DB is used.
+        version: '7.0.14',
+      },
+    });
+    process.env.MONGODB_URI = mongoServer.getUri();
+  }
 
   if (mongoose.connection.readyState !== 0) {
     await mongoose.disconnect();
   }
 
-  await mongoose.connect(mongoUri);
+  await mongoose.connect(process.env.MONGODB_URI as string);
 });
 
 beforeEach(async () => {
@@ -82,5 +89,7 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await mongoose.disconnect();
-  await mongoServer.stop();
+  if (mongoServer) {
+    await mongoServer.stop();
+  }
 });
