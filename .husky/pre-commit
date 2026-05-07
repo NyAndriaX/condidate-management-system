@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged on staged backend TypeScript files
+# (eslint --fix, prettier --write, jest --findRelatedTests).
+# Configured under "lint-staged" in backend/package.json.
+cd backend && npx lint-staged

@@ -1,0 +1,12 @@
+{
+  "name": "candidate-management-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Root workspace — manages husky git hooks. Backend & frontend each have their own package.json.",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
+  }
+}

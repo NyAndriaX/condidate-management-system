@@ -39,10 +39,18 @@ cp backend/.env.example backend/.env
 # 3. Lancer tous les services
 docker-compose up --build
 
-# L'application est disponible sur :
-# → Frontend : http://localhost:3000
-# → Backend  : http://localhost:5000
-# → MongoDB  : localhost:27017
+# Les ports hôtes sont assignés dynamiquement par Docker pour éviter
+# tout conflit. Pour les voir :
+docker compose ps
+
+# Exemple de sortie :
+#   NAME            PORTS
+#   ...-frontend-1  0.0.0.0:32769->80/tcp     ← ouvrir cette URL dans le navigateur
+#   ...-backend-1   0.0.0.0:32768->5000/tcp
+#   ...-mongodb-1   0.0.0.0:32770->27017/tcp
+#
+# Le frontend sert l'application et reverse-proxy /api/* vers le backend
+# via nginx — aucune configuration côté navigateur n'est nécessaire.
 ```
 
 ### Démarrage en développement local

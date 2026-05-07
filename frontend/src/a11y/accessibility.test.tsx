@@ -51,8 +51,8 @@ describe('accessibility', () => {
     render(<LoginPage />);
     const user = userEvent.setup();
 
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Password');
+    const emailInput = screen.getByLabelText('Adresse email');
+    const passwordInput = screen.getByLabelText('Mot de passe');
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
 
