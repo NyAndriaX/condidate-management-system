@@ -147,8 +147,6 @@ jobs:
           JWT_SECRET: ${{ env.JWT_SECRET }}
           PORT: ${{ env.PORT }}
 
-        services: {}
-
       - name: Check frontend coverage threshold
         working-directory: frontend
         run: |
