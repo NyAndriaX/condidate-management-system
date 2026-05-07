@@ -84,4 +84,53 @@ describe('auth.middleware authenticate', () => {
     expect(error.statusCode).toBe(401);
     expect(error.message).toContain('expire');
   });
+
+  it('should return 401 when scheme is not Bearer', () => {
+    const req = {
+      headers: {
+        authorization: 'Basic some-credential',
+      },
+    } as Request;
+
+    authenticate(req, res, next);
+
+    const error = (next as jest.Mock).mock.calls[0][0] as AppError;
+    expect(error).toBeInstanceOf(AppError);
+    expect(error.statusCode).toBe(401);
+    expect(error.message).toContain('Bearer');
+  });
+
+  it('should return 401 when Bearer token part is missing', () => {
+    const req = {
+      headers: {
+        authorization: 'Bearer ',
+      },
+    } as Request;
+
+    authenticate(req, res, next);
+
+    const error = (next as jest.Mock).mock.calls[0][0] as AppError;
+    expect(error).toBeInstanceOf(AppError);
+    expect(error.statusCode).toBe(401);
+  });
+
+  it('should return 401 when token payload has no userId', () => {
+    const tokenWithoutUserId = jwt.sign(
+      { email: 'no-id@example.com' },
+      process.env.JWT_SECRET as string,
+    );
+
+    const req = {
+      headers: {
+        authorization: `Bearer ${tokenWithoutUserId}`,
+      },
+    } as Request;
+
+    authenticate(req, res, next);
+
+    const error = (next as jest.Mock).mock.calls[0][0] as AppError;
+    expect(error).toBeInstanceOf(AppError);
+    expect(error.statusCode).toBe(401);
+    expect(error.message).toContain('utilisateur');
+  });
 });

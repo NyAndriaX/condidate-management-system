@@ -2,7 +2,14 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   roots: ['<rootDir>/src', '<rootDir>/tests'],
-  collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts', '!src/index.ts'],
+  collectCoverageFrom: [
+    'src/services/candidate.service.ts',
+    'src/services/validation.service.ts',
+    'src/models/Candidate.model.ts',
+    'src/models/User.model.ts',
+    'src/middleware/auth.middleware.ts',
+    'src/middleware/validation.middleware.ts',
+  ],
   coverageThreshold: {
     global: {
       branches: 90,

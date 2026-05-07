@@ -60,4 +60,21 @@ describe('validation.middleware validate', () => {
     });
     expect(next).not.toHaveBeenCalled();
   });
+
+  it('should forward non-Zod errors to next()', () => {
+    const unexpectedError = new Error('unexpected boom');
+    const explosiveSchema = {
+      parse: jest.fn(() => {
+        throw unexpectedError;
+      }),
+    } as unknown as z.ZodSchema;
+
+    const req = { body: {} } as Request;
+
+    const middleware = validate(explosiveSchema);
+    middleware(req, res, next);
+
+    expect(next).toHaveBeenCalledWith(unexpectedError);
+    expect(statusMock).not.toHaveBeenCalled();
+  });
 });
