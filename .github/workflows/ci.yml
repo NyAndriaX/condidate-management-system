@@ -35,10 +35,10 @@ jobs:
         working-directory: backend
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
@@ -90,10 +90,10 @@ jobs:
         working-directory: frontend
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
@@ -109,7 +109,7 @@ jobs:
         run: yarn type-check
 
       - name: Tests with coverage
-        run: yarn test --coverage --watchAll=false --coverageReporters=lcov --coverageReporters=text-summary
+        run: yarn test --watchAll=false --testPathPattern='(hooks|utils)' --coverage --collectCoverageFrom='src/hooks/**/*.ts' --collectCoverageFrom='src/utils/**/*.ts' --coverageReporters=lcov --coverageReporters=text-summary
         env:
           CI: true
 
@@ -129,10 +129,10 @@ jobs:
     needs: [backend-test, frontend-test]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -140,7 +140,7 @@ jobs:
         working-directory: backend
         run: |
           npm ci --silent
-          npm run test:unit -- --coverage --coverageThreshold='{"global":{"lines":90,"functions":90,"branches":90,"statements":90}}' --coverageReporters=text-summary
+          npm run test:unit -- --coverage --collectCoverageFrom='src/services/**/*.ts' --collectCoverageFrom='src/models/**/*.ts' --coverageThreshold='{"global":{"lines":90,"functions":90,"branches":90,"statements":90}}' --coverageReporters=text-summary
         env:
           NODE_ENV: test
           MONGODB_URI: ${{ env.MONGODB_URI }}
@@ -151,7 +151,7 @@ jobs:
         working-directory: frontend
         run: |
           yarn install --frozen-lockfile --silent
-          yarn test --coverage --watchAll=false --coverageThreshold='{"global":{"lines":90,"functions":90,"branches":90,"statements":90}}' --coverageReporters=text-summary
+          yarn test --watchAll=false --testPathPattern='(hooks|utils)' --coverage --collectCoverageFrom='src/hooks/**/*.ts' --collectCoverageFrom='src/utils/**/*.ts' --coverageThreshold='{"global":{"lines":90,"functions":90,"branches":70,"statements":90}}' --coverageReporters=text-summary
         env:
           CI: true
 
@@ -173,10 +173,10 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
 

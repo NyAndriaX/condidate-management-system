@@ -46,7 +46,7 @@ interface CandidateMethods {
   softDelete(): Promise<void>;
 }
 
-interface CandidateModel extends Model<CandidateSchemaFields, {}, CandidateMethods> {
+interface CandidateModel extends Model<CandidateSchemaFields, Record<string, never>, CandidateMethods> {
   findActive(): Promise<Array<CandidateDocument>>;
 }
 
@@ -164,7 +164,7 @@ candidateSchema.method('softDelete', async function softDelete(this: CandidateDo
 candidateSchema.static(
   'findActive',
   function findActive(
-    this: Model<CandidateSchemaFields, {}, CandidateMethods>,
+    this: Model<CandidateSchemaFields, Record<string, never>, CandidateMethods>,
   ): Promise<Array<CandidateDocument>> {
   return this.find({ isDeleted: false }).exec() as Promise<Array<CandidateDocument>>;
   },

@@ -26,7 +26,7 @@ interface UserMethods {
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-interface UserModel extends Model<UserSchemaFields, {}, UserMethods> {}
+interface UserModel extends Model<UserSchemaFields, Record<string, never>, UserMethods> {}
 
 export type UserDocument = HydratedDocument<UserSchemaFields, UserMethods> & {
   _id: Types.ObjectId;

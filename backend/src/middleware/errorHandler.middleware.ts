@@ -13,7 +13,8 @@ interface MongoLikeError extends Error {
   value?: unknown;
 }
 
-export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+export const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
+  void next;
   const mongoError = err as MongoLikeError;
   let statusCode = 500;
   let message = 'Erreur interne du serveur';

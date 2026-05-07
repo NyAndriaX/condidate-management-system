@@ -1,5 +1,6 @@
 export class ValidationService {
-  public async validateAsync(_candidateId: string): Promise<boolean> {
+  public async validateAsync(candidateId: string): Promise<boolean> {
+    void candidateId;
     await new Promise<void>((resolve) => {
       setTimeout(resolve, 2000);
     });
