@@ -1,0 +1,57 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.grid label,
+.form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.skillsRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: #e5e7eb;
+  border-radius: 999px;
+  padding: 0.25rem 0.5rem;
+}
+
+.tag button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.error {
+  color: #b91c1c;
+  font-size: 0.875rem;
+  margin: 0;
+}
