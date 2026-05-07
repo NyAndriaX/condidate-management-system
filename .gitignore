@@ -41,7 +41,4 @@ temp/
 playwright-report/
 test-results/
 
-# Local migration backups
-frontend_local/
-frontend/.git.frontend.backup/
 
