@@ -1330,12 +1330,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.1.tgz#de633db3ec2ef6a3c89e2f19038063e8a122e2c2"
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
-"@hookform/resolvers@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-5.2.2.tgz#5ac16cd89501ca31671e6e9f0f5c5d762a99aa12"
-  integrity sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA==
-  dependencies:
-    "@standard-schema/utils" "^0.3.0"
+"@hookform/resolvers@3.9.1":
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-3.9.1.tgz#a23883c40bfd449cb6c6ab5a0fa0729184c950ff"
+  integrity sha512-ud2HqmGBM0P0IABqoskKWI6PEf6ZDDBZkFqe2Vnl+mTHCEHzr3ISjjZyCwTjC/qpL25JC9aIDkloQejvMeq0ug==
 
 "@humanwhocodes/config-array@^0.13.0":
   version "0.13.0"
@@ -2161,11 +2159,6 @@
   integrity sha512-OAPJUAtgeINhh/TAlUID4QTs53Njm7xzddaVlEs/SXwgtiD1tW22zAB/W1wdqfrpmikgaWQ9Fw6Ws+hsiRm5Vg==
   dependencies:
     "@sinonjs/commons" "^1.7.0"
-
-"@standard-schema/utils@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@standard-schema/utils/-/utils-0.3.0.tgz#3d5e608f16c2390c10528e98e59aef6bf73cae7b"
-  integrity sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
