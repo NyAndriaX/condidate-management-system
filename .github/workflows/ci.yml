@@ -151,7 +151,7 @@ jobs:
         working-directory: frontend
         run: |
           yarn install --frozen-lockfile --silent
-          yarn test --watchAll=false --testPathPattern='(hooks|utils)' --coverage --collectCoverageFrom='src/hooks/**/*.ts' --collectCoverageFrom='src/utils/**/*.ts' --coverageThreshold='{"global":{"lines":90,"functions":90,"branches":70,"statements":90}}' --coverageReporters=text-summary
+          yarn test --watchAll=false --testPathPattern='(hooks|utils)' --coverage --collectCoverageFrom='src/hooks/**/*.ts' --collectCoverageFrom='src/utils/**/*.ts' --coverageThreshold='{"global":{"lines":90,"functions":90,"branches":90,"statements":90}}' --coverageReporters=text-summary
         env:
           CI: true
 

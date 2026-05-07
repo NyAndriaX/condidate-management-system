@@ -66,6 +66,50 @@ describe('useCandidates', () => {
     expect(result.current.data?.candidates).toHaveLength(1);
   });
 
+  it('uses default pagination when called without params', async () => {
+    mockedCandidateService.getCandidates.mockResolvedValue({
+      candidates: [candidate],
+      total: 1,
+      pages: 1,
+    });
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+
+    const { result } = renderHook(() => useCandidates(), {
+      wrapper: createWrapper(queryClient),
+    });
+
+    await waitFor(() => {
+      expect(result.current.isSuccess).toBe(true);
+    });
+
+    expect(mockedCandidateService.getCandidates).toHaveBeenCalledWith(1, 10, undefined);
+  });
+
+  it('passes status filter to query function', async () => {
+    mockedCandidateService.getCandidates.mockResolvedValue({
+      candidates: [candidate],
+      total: 1,
+      pages: 1,
+    });
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+
+    const { result } = renderHook(() => useCandidates({ status: 'pending' }), {
+      wrapper: createWrapper(queryClient),
+    });
+
+    await waitFor(() => {
+      expect(result.current.isSuccess).toBe(true);
+    });
+
+    expect(mockedCandidateService.getCandidates).toHaveBeenCalledWith(1, 10, 'pending');
+  });
+
   it('invalidates cache after create/update/delete mutations', async () => {
     mockedCandidateService.getCandidates.mockResolvedValue({
       candidates: [candidate],

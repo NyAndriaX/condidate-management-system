@@ -16,5 +16,7 @@ describe('formatters', () => {
     expect(formatPhoneNumber('+33612345678')).toBe('06 12 34 56 78');
     expect(formatPhoneNumber('+12025550123')).toBe('+12025550123');
     expect(formatPhoneNumber('')).toBe('');
+    expect(formatPhoneNumber('abc-def')).toBe('abc-def');
+    expect(formatPhoneNumber('+331234567890')).toBe('+331234567890');
   });
 });
