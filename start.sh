@@ -1,15 +1,9 @@
 #!/bin/bash
 
-# Start MongoDB
-mkdir -p /home/runner/data/mongodb
-mongod --dbpath /home/runner/data/mongodb --bind_ip 127.0.0.1 --port 27017 --fork --logpath /home/runner/data/mongodb/mongod.log
-echo "MongoDB started"
-
 # Start Backend
 cd /home/runner/workspace/backend
 npm run dev &
-BACKEND_PID=$!
-echo "Backend started with PID $BACKEND_PID"
+echo "Backend started"
 
 # Wait for backend to be ready
 sleep 5
