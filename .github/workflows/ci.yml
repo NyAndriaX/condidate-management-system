@@ -201,30 +201,22 @@ jobs:
         run: npm ci
         working-directory: backend
 
-      - name: Install Playwright
+      - name: Install frontend dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: frontend
+
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
         working-directory: backend
 
-      - name: Start backend
-        run: npm run dev &
+      - name: Run E2E tests
+        run: npm run test:e2e
         working-directory: backend
         env:
           MONGODB_URI: ${{ env.MONGODB_URI }}
           JWT_SECRET: ${{ env.JWT_SECRET }}
           PORT: ${{ env.PORT }}
           NODE_ENV: development
-
-      - name: Wait for backend
-        run: |
-          echo "Waiting for backend..."
-          for i in $(seq 1 15); do
-            curl -sf http://localhost:5000/health && echo "Backend ready" && break
-            sleep 2
-          done
-
-      - name: Run E2E tests
-        run: npm run test:e2e
-        working-directory: backend
 
       - name: Upload E2E screenshots on failure
         if: failure()

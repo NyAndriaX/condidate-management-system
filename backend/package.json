@@ -16,7 +16,7 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc -p tsconfig.test.json"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",

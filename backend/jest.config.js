@@ -1,6 +1,16 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json',
+    },
+  },
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json',
+    },
+  },
   roots: ['<rootDir>/src', '<rootDir>/tests'],
   testPathIgnorePatterns: ['<rootDir>/tests/e2e/'],
   collectCoverageFrom: [
